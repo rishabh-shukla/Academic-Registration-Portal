@@ -1,0 +1,42 @@
+{% extends "app/base.html" %}
+{% block content %}
+<nav>
+    <div class="nav-wrapper">
+      IIT Jodhpur Registration Portal
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="/smessage">Inbox</a></li>
+        <li><a href="/studentc">Register for courses</a></li>
+        <li><a href="/sfinal">Request status</a></li>
+        <li><a href="/course_info">Courses</a></li>
+        <li><a href="/logout_s">Logout</a></li>
+
+      </ul>
+    </div>
+  </nav>
+<div class="container">
+<h4>
+Mentor: {{mentor.name}}
+</h4>
+<br>
+<table class="striped">
+<tr>
+<th>Code</th>
+<th>Course Name</th>
+<th>L-T-P-[C]</th>
+</tr>
+{%for c in courses%}
+<tr>
+<td>{{c.code}}</td>
+<td>{{c.name}}</td>
+<td>{{c.ltp}}</td>
+</tr>
+{%endfor%}
+</table>
+<form name="final" method="POST">
+{% csrf_token %}
+<!-- <input type="radio" name="type" value="accept">Accept
+<input type="radio" name="type" value="reject">Reject -->
+<input type="submit" value="Send Request">
+</form>
+</div>
+{%endblock%}

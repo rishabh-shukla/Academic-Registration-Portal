@@ -1,0 +1,90 @@
+{% extends "app/base.html" %}
+{% block content %}
+
+<nav>
+    <div class="nav-wrapper">
+      IIT Jodhpur Registration Portal
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li class="active"><a href="/studentp">Pay Fees</a></li>
+        <li><a href="/smessage">Inbox</a></li>
+        <li><a href="/timetable" target="_blank">TimeTable</a></li>
+        <li><a href="/fee" target="_blank">Fees Structure</a></li>
+        <li><a href="/studentc">Register for courses</a></li>
+        <li><a href="/sfinal">Request status</a></li>
+        <li><a href="/logout_s">Logout</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="container">
+	<h5>Welcome {{student.name}}</h5><br>
+	<table class="highlight">
+	{%if mess_dues or lib_dues or reg_fees or mess_fees %}
+	<tr><th>Payment Left</th><th>Amount</th></tr>
+	{%endif%}
+		{%if mess_dues %}
+		<tr>
+			<td>Mess Dues</td>
+			<td>{{mess_dues}}</td>
+		</tr>
+		{%endif%}
+		{%if lib_dues%}
+		<tr>
+			<td>Library Dues</td>
+			<td>{{lib_dues}}</td>
+		</tr>
+		{%endif%}
+		{%if mess_fees %}
+		<tr>
+			<td>Mess Fees</td>
+			<td>{{mess_fees}}</td>
+		</tr>
+		{%endif%}
+		{%if reg_fees %}
+		<tr>
+			<td>Semester Fees</td>
+			<td>{{reg_fees}}</td>
+		</tr>
+		{%endif%}
+	</table>
+	<script>
+	
+function storeInSession(){
+    window.sessionStorage['submit'] = 'a';
+}
+
+function checkSubmitStatus(){
+    if(window.sessionStorage['submit']){
+        window.sessionStorage['submit'] = '';
+        location.reload();
+    }
+}
+checkSubmitStatus();
+	</script>
+	
+	{%if mess_dues or lib_dues or reg_fees or mess_fees %}
+	<br><h4>Pay Fees</h4><br>
+		<form method="POST" name="fees" onsubmit="storeInSession()">
+		{% csrf_token %}
+			SBI Debit Card No.<input name="debitcard" type="number" min="1000000000000000" max="9999999999999999" required>
+			SBI Pin/Password <input type="password" name="pass">
+			<select name="type" required>
+			{%if mess_dues %}
+			<option value="mess_dues">Mess Dues</option>
+		    {%endif%}
+		    {%if mess_fees %}
+		     <option value="mess_fees">Mess Fees</option>
+		     {%endif%}
+		    {%if lib_dues %}
+		    <option value="lib_dues">Library Dues</option>
+		    {%endif%}
+		    {%if reg_fees %}
+		    <option value="reg_fees">Semester Fees</option>
+		    {%endif%}
+		    		<!-- Also Can look for Radio Buttons here . See later-->
+		  </select><br>
+		 <!--  <input type="submit" value="Pay"> -->
+		  <button class="btn waves-effect waves-light" type="submit">Pay</button>
+		</form>
+	{%endif%}
+</div>
+{%endblock%}

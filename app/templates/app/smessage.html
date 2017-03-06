@@ -1,0 +1,37 @@
+{% extends "app/base.html" %}
+{% block content %}
+<nav>
+    <div class="nav-wrapper">
+      IIT Jodhpur Registration Portal
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li ><a href="/studentp">Pay Fees</a></li>
+        <li class="active"><a href="/smessage">Inbox</a></li>
+        <li><a href="/studentc">Register for courses</a></li>
+        <li><a href="/sfinal">Request status</a></li>
+        <li><a href="/course_info">Courses</a></li>
+        <li><a href="/logout_s">Logout</a></li>
+
+      </ul>
+    </div>
+  </nav>
+<div class="container">
+<h4>Messages from Faculty</h4>
+{%if msgs%}
+<table class="striped">
+<tr><th>Sender</th><th>Message</th><th>Delete</th></tr>
+{%for message in msgs%}
+<tr>
+<td>Dr. {{message.sname}}</td>
+<td>{{message.msg}}</td>
+<form name='msg_del' method="POST">
+{% csrf_token %}
+<td><input type="submit" value="Delete"></td>
+<input type="hidden" value="{{message.sender}}" name="sender">
+<input type="hidden" value="{{message.msg}}" name="msg_value">
+</form>
+</tr>
+{%endfor%}
+</table>
+{%endif%}
+</div>
+{%endblock%}

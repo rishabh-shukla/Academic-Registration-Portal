@@ -1,0 +1,81 @@
+{%load staticfiles%}
+<html>
+<head>
+	<title>IIT Jodhpur</title>
+<!-- 	  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
+   	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+	
+	<link type="text/css" rel="stylesheet" href="{% static 'app/css/materialize.css' %}"  media="screen,projection"/>
+
+	<!--Let browser know website is optimized for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+	<style>
+	img.ex1{margin-left: 1.5cm;
+		margin-top: 0.5cm;}
+    body{
+      background-size:cover;
+    }
+    ::-webkit-input-placeholder {
+   color: green;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: green;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: green;  
+}
+
+:-ms-input-placeholder {  
+   color: yellow;  
+}
+	</style>
+</head>
+<body background="{% static 'app/images/1.jpg'%}">
+<img class="ex1" src="{% static 'app/images/IITJ_Logo.png' %}" height=100 width=100>
+<script type="text/javascript" src="{% static 'app/jquery-2.1.1.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'app/js/materialize.js' %}"></script>
+<center><h4>IIT Jodhpur Academic Registration</h4>
+<h2>Sign In</h2><br>
+</center>
+<center><h4>
+<font color="red">
+	{%if error %}
+	{{error}}
+	{% endif %}
+</font></h4></center>
+
+<form method="POST" name="login">
+{% csrf_token %}
+ <div class="container">
+Enter LDAP id:<input type="text" name="id" placeholder="Enter LDAP id" required><br>
+Password:<input type="password" name="password" placeholder="Password" required><br>
+Role:<select name="type" required>
+    <option value="student">Student</option>
+    <option value="faculty">Faculty</option>		<!-- Also Can look for Radio Buttons here . See later-->
+  </select><br>
+<center><!-- 
+<input type="submit" value="Login"> -->
+<button class="btn waves-effect waves-light" type="submit">Login</button>
+</div></center>
+</form>
+<center>
+{% if messages %}<div class="card-panel lime accent-2"><h4>
+<div class="messages">
+    {% for message in messages %}
+    {{ message }}<br>
+    {% endfor %}
+</div>
+{% endif %}</h4></div>
+</center>
+
+  <script>
+     $(document).ready(function() {
+        $('select').material_select();
+    });
+  </script>
+</body>
+</html>
