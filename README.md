@@ -22,13 +22,13 @@
 - To run admin, open the address **http://127.0.0.1:8000/admin**  
 Username - **admin**  
 password - **admin123**  
-- In **admin** you can:  
-(a) Add new user(Student/Faculty) along with details.  
+- In **Admin** you can:  
+(a) Add/Remove new user(Student/Faculty) along with details.  
 (b) Make faculty the branch representatives.  
-(c) Add courses.  
-(d) Add compulsary Courses for each sem for each branch.  
+(c) Add/Remove courses.  
+(d) Add/Remove compulsary Courses for each sem for each branch.  
 (e) Add fees/dues of student which are to be paid online.  
-- For **student**:  
+- For **Student**:  
 (a) Pay Fees and dues before registration.  
 (b) Submit request to concerned faculty for elective courses.  
 (c) See the message received to him/her by faculty.  
